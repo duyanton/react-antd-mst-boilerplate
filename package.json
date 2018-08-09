@@ -51,6 +51,7 @@
     "analyze": "source-map-explorer build/static/js/main.*",
     "precommit": "echo Running Prettier and ESLint for staged files...; lint-staged",
     "start": "node scripts/start.js",
+    "start-server": "node json-server",
     "build": "echo Building i18n; npm run build-i18n; node scripts/build.js",
     "build-i18n": "rm -rf src/i18n/build/messages; ./node_modules/babel-cli/bin/babel.js --quiet src > /dev/null; ./node_modules/babel-cli/bin/babel-node.js src/i18n/aggregator.js",
     "test": "node scripts/test.js --env=jsdom"
@@ -128,6 +129,9 @@
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.0",
+    "faker": "^4.1.0",
+    "json-server": "^0.14.0",
+    "jsonwebtoken": "^8.3.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
     "less-vars-to-js": "^1.2.1",
