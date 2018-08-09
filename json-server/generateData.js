@@ -1,7 +1,7 @@
 const faker = require('faker');
 
 const ADMIN_USER = {
-  id: 1,
+  id: '1',
   address: '807 Harris Rapid',
   avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/mattlat/128.jpg',
   email: 'admin@example.com',
@@ -17,7 +17,7 @@ module.exports = () => {
 
   for (let i = 2; i <= 1000; i += 1) {
     data.users.push({
-      id: i,
+      id: i.toString(),
       address: faker.address.streetAddress(),
       avatar: faker.internet.avatar(),
       email: faker.internet.email(),

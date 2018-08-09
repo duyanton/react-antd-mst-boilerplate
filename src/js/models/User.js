@@ -1,13 +1,21 @@
 import { types } from 'mobx-state-tree';
+import _values from 'lodash/values';
 
-import ModelBase from './ModelBase';
+import BaseModel from './BaseModel';
+
+import roles from '../constants/roles';
 
 const User = types.compose(
   'User',
-  ModelBase,
+  BaseModel,
   types.model({
-    full_name: types.optional(types.string, ''),
-    email: types.optional(types.string, ''),
+    address: types.maybe(types.string),
+    avatar: types.maybe(types.string),
+    email: types.maybe(types.string),
+    full_name: types.maybe(types.string),
+    job_title: types.maybe(types.string),
+    phone: types.maybe(types.string),
+    role: types.maybe(types.enumeration(_values(roles))),
   }),
 );
 

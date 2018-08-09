@@ -50,7 +50,6 @@ const UIStore = types
         baseURL: config.API_URL,
         timeout: 100000,
         token: self.sessionStore.token,
-        handleUnauthorized: self.sessionStore.logout,
       });
     };
 
