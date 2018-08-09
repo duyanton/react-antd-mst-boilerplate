@@ -10,7 +10,7 @@ import { configure } from 'mobx';
 
 import registerServiceWorker from './registerServiceWorker';
 
-import Routes from './routes';
+import Routes from './Routes';
 
 import stores from './stores';
 

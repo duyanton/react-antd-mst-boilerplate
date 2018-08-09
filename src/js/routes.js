@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import { Router, Route, browserHistory } from 'react-router';
-
 import _values from 'lodash/values';
 
+import { Router, Route, Redirect, browserHistory } from 'react-router';
 import Loadable from 'react-loadable';
 
 import withRole from './HOC/withRole';
@@ -13,6 +11,8 @@ import OverlayWholePageLoading from './components/OverlayWholePageLoading';
 
 import roles from './constants/roles';
 
+import stores from './stores';
+
 const Loading = ({ pastDelay }) => (pastDelay ? <OverlayWholePageLoading /> : null);
 Loading.propTypes = {
   pastDelay: PropTypes.bool,
@@ -20,12 +20,6 @@ Loading.propTypes = {
 
 const AsyncHeader = Loadable({
   loader: () => import(/* webpackChunkName: "Header" */ './containers/Header'),
-  loading: Loading,
-  delay: 1000,
-});
-
-const AsyncHomePage = Loadable({
-  loader: () => import(/* webpackChunkName: "HomePage" */ './pages/HomePage'),
   loading: Loading,
   delay: 1000,
 });
@@ -42,8 +36,24 @@ const AsyncDashboardPage = Loadable({
   delay: 1000,
 });
 
+const requireLoggedIn = () => {
+  const {
+    uiStore: { sessionStore },
+  } = stores;
+  if (!sessionStore.isLogged) return browserHistory.push('/');
+  return sessionStore.isLogged;
+};
+
+const redirectIfLoggedIn = () => {
+  const {
+    uiStore: { sessionStore },
+  } = stores;
+  if (sessionStore.isLogged) return browserHistory.push('/users');
+  return sessionStore.isLogged;
+};
+
 // const User = withRole([roles.ROLE_USER]);
-// const Admin = withRole([roles.ROLE_ADMIN]);
+const Admin = withRole([roles.ROLE_ADMIN]);
 const Guest = withRole([roles.ROLE_GUEST]);
 const Anyone = withRole(_values(roles));
 
@@ -52,13 +62,13 @@ class Routes extends Component {
     return (
       <Router history={browserHistory}>
         <Route component={App}>
-          <Route path="/" component={Guest(AsyncHomePage)} />
+          <Redirect from="/" to="/login" />
 
           <Route component={Anyone(AsyncHeader)}>
-            <Route path="/dashboard" component={AsyncDashboardPage} />
+            <Route path="/users" component={Admin(AsyncDashboardPage)} onEnter={requireLoggedIn} />
           </Route>
 
-          <Route path="/login" component={AsyncLoginPage} />
+          <Route path="/login" component={Guest(AsyncLoginPage)} onEnter={redirectIfLoggedIn} />
         </Route>
       </Router>
     );

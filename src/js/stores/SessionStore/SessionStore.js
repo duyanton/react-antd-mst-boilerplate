@@ -65,11 +65,11 @@ const SessionStore = types
           email,
           password,
         });
-        const { token } = response.data;
-        if (token && token.length) {
-          self.token = token;
+        const { access_token } = response.data;
+        if (access_token && access_token.length) {
+          self.token = access_token;
         }
-        onSuccess(token);
+        onSuccess(access_token);
       } catch (error) {
         console.error(error);
         onError(error);
