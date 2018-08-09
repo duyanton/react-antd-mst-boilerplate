@@ -50,7 +50,7 @@ class Header extends Component {
             </Button>
           </div>
         </AntHeader>
-        <Content css="padding: 24px 36px">{this.props.children}</Content>
+        <Content css="padding: 3% 5%">{this.props.children}</Content>
       </Layout>
     );
   }

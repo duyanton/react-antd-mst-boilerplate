@@ -10,7 +10,6 @@ const UserStore = types.compose(
   types
     .model({
       users: types.map(User),
-      myProfile: types.maybe(types.reference(User)),
     })
     .views(self => ({
       get userList() {
@@ -50,6 +49,7 @@ const UserStore = types.compose(
 
         try {
           const response = yield self.transport.get(`${self.apiRoot}?_page=1&_limit=20`);
+
           response.data.forEach((user) => {
             self.add(user);
           });

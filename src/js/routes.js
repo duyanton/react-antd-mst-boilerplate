@@ -30,8 +30,8 @@ const AsyncLoginPage = Loadable({
   delay: 1000,
 });
 
-const AsyncDashboardPage = Loadable({
-  loader: () => import(/* webpackChunkName: "DashboardPage" */ './pages/DashboardPage'),
+const AsyncUserPage = Loadable({
+  loader: () => import(/* webpackChunkName: "UserPage" */ './pages/UserPage'),
   loading: Loading,
   delay: 1000,
 });
@@ -65,7 +65,7 @@ class Routes extends Component {
           <Redirect from="/" to="/login" />
 
           <Route component={Anyone(AsyncHeader)}>
-            <Route path="/users" component={Admin(AsyncDashboardPage)} onEnter={requireLoggedIn} />
+            <Route path="/users" component={Admin(AsyncUserPage)} onEnter={requireLoggedIn} />
           </Route>
 
           <Route path="/login" component={Guest(AsyncLoginPage)} onEnter={redirectIfLoggedIn} />
