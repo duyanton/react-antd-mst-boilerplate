@@ -43,7 +43,7 @@ server.post('/auth/login', (req, res) => {
   }
 
   const user = findUser({ email, password });
-  const access_token = createToken({ id: user.id, email: user.email });
+  const access_token = createToken({ id: user.id, email: user.email, role: user.role });
   res.status(200).json(Object.assign({}, user, { access_token }));
 });
 

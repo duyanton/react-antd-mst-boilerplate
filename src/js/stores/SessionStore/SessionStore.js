@@ -20,9 +20,9 @@ const SessionStore = types
       return self.token !== '' && self.token.length > 5;
     },
 
-    get userFromTokenHeader() {
-      const tokenContent = self.isLogged ? self.decodeJWTHeader(self.token) : null;
-      return tokenContent ? tokenContent.user : null;
+    get userFromTokenPayload() {
+      const tokenContent = self.isLogged ? self.decodeJWTPayload() : undefined;
+      return tokenContent || undefined;
     },
 
     get transport() {
@@ -30,17 +30,22 @@ const SessionStore = types
     },
 
     get currentUserRole() {
-      return self.currentUser ? self.currentUser.role : roles.ROLE_GUEST;
+      return self.userFromTokenPayload
+        ? self.userFromTokenPayload.role || roles.ROLE_USER
+        : roles.ROLE_GUEST;
     },
   }))
   .actions((self) => {
     /**
-     * Decode JWT token header and return decoded content
+     * Decode JWT token payload and return decoded content
      */
-    const decodeJWTHeader = () => {
-      const base64Url = self.token.split('.')[1];
-      const base64 = base64Url.replace('-', '+').replace('_', '/');
-      return JSON.parse(window.atob(base64) || '{}');
+    const decodeJWTPayload = () => {
+      const base64Payload = self.token
+        .split('.')[1]
+        .replace('-', '+')
+        .replace('_', '/');
+
+      return JSON.parse(window.atob(base64Payload) || '{}');
     };
 
     /**
@@ -179,7 +184,7 @@ const SessionStore = types
     return {
       afterCreate,
       checkRecoveryToken,
-      decodeJWTHeader,
+      decodeJWTPayload,
       forgotPassword,
       loadAuthCookie,
       login,
