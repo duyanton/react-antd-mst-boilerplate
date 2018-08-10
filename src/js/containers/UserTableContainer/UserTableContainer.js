@@ -12,11 +12,35 @@ class UserTableContainer extends Component {
     userStore: PropTypes.object,
   };
 
+  handlePageChange = (page) => {
+    // Scroll to top on page change
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+
+    const {
+      userStore: { pagination },
+    } = this.props;
+    pagination.setPage(page);
+  };
+
   render() {
     const { userStore } = this.props;
-    const { userList } = userStore;
+    const {
+ isInited, isLoading, usersFromResponse, pagination,
+} = userStore;
 
-    return <UserTable users={userList} loading={!userStore.isInited || userStore.isLoading} />;
+    return (
+      <UserTable
+        loading={!isInited || isLoading}
+        users={usersFromResponse}
+        pageSize={pagination.limit}
+        total={pagination.total}
+        onPageChange={this.handlePageChange}
+      />
+    );
   }
 }
 

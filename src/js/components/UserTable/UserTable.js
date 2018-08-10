@@ -38,15 +38,8 @@ const ActionButton = styled(Button)`
 
 const UserTable = observer(
   ({
-    loading,
-    users,
-    currentPage,
-    totalUsers,
-    onClickEdit,
-    onClickDelete,
-    onClickRow,
-    onPageChange,
-  }) => {
+ loading, users, pageSize, total, onClickEdit, onClickDelete, onClickRow, onPageChange,
+}) => {
     const columns = [
       {
         title: 'Id',
@@ -113,10 +106,8 @@ const UserTable = observer(
         pagination={{
           hideOnSinglePage: true,
           showQuickJumper: true,
-          defaultPageSize: 20,
-          defaultCurrent: 1,
-          current: currentPage,
-          total: totalUsers,
+          pageSize,
+          total,
           onChange: onPageChange,
         }}
         rowKey="id"
@@ -133,6 +124,7 @@ UserTable.propTypes = {
   loading: PropTypes.bool,
   users: PropTypes.arrayOf(PropTypes.object),
   currentPage: PropTypes.number,
+  pageSize: PropTypes.number,
   total: PropTypes.number,
   onClickEdit: PropTypes.func,
   onClickDelete: PropTypes.func,
@@ -142,8 +134,6 @@ UserTable.propTypes = {
 
 UserTable.defaultProps = {
   users: [],
-  currentPage: 1,
-  totalUsers: 1000,
   onClickEdit: () => {},
   onClickDelete: () => {},
   onClickRow: () => {},

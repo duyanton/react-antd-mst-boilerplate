@@ -1,7 +1,8 @@
 import { values } from 'mobx';
 import { types, flow, detach } from 'mobx-state-tree';
 
-import BaseModelStore from '../BaseModelStore';
+import BaseModelStore from '../Composable/BaseModelStore';
+import Pagination from '../Composable/Pagination';
 import User from '../../models/User';
 
 const UserStore = types.compose(
@@ -9,7 +10,15 @@ const UserStore = types.compose(
   BaseModelStore,
   types
     .model({
+      // Store all users data
       users: types.map(User),
+      pagination: types.optional(Pagination, {
+        currentPage: 1,
+        limit: 20,
+      }),
+
+      // To keep results of pagination, filter, sorting,...
+      usersFromResponse: types.array(types.reference(User)),
     })
     .views(self => ({
       get userList() {
@@ -17,15 +26,19 @@ const UserStore = types.compose(
       },
     }))
     .volatile(() => ({
-      apiRoot: '/users',
-
       // If router location matches one of these pathnames
       // init function will be invoked
       initPathnames: ['/users'],
+
+      // API endpoint
+      apiRoot: '/users',
+
+      isInited: false,
+      isLoading: false,
     }))
     .actions((self) => {
       /**
-       * If we need to transform nested JSON object, keep reference, merger array node, etc...
+       * If we need to transform nested JSON object, keep reference, merge array node, etc...
        * @param {object} snapshot - user snapshot
        */
       const normalize = snapshot => snapshot;
@@ -48,11 +61,23 @@ const UserStore = types.compose(
         self.isLoading = true;
 
         try {
-          const response = yield self.transport.get(`${self.apiRoot}?_page=1&_limit=20`);
+          const { page, limit } = self.pagination;
+          const { data, headers } = yield self.transport.get(
+            `${self.apiRoot}?_page=${page}&_limit=${limit}`,
+          );
 
-          response.data.forEach((user) => {
+          // Save total users to pagination
+          if (headers['x-total-count']) {
+            self.pagination.total = Number(headers['x-total-count']);
+          }
+
+          // Put all users from response to users map
+          data.forEach((user) => {
             self.add(user);
           });
+
+          // Save temporary users from response by using reference to users node
+          self.usersFromResponse = data.map(user => user.id);
         } catch (err) {
           console.error(err);
         } finally {
