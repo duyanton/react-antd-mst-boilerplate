@@ -1,5 +1,5 @@
 import { values } from 'mobx';
-import { types, flow, detach } from 'mobx-state-tree';
+import { types, flow, detach, isStateTreeNode } from 'mobx-state-tree';
 
 import BaseModelStore from '../Composable/BaseModelStore';
 import Pagination from '../Composable/Pagination';
@@ -115,11 +115,24 @@ const UserStore = types.compose(
         }
       };
 
+      /**
+       * Remove a node from state tree
+       * @param {object} node - MST node to be removed
+       */
+      const remove = (node) => {
+        if (!isStateTreeNode(node)) return;
+
+        // Clear all references to this node before detach
+        self.usersFromResponse = self.usersFromResponse.filter(item => item.id !== node.id);
+        detach(node);
+      };
+
       return {
         add,
         getById,
         load,
         normalize,
+        remove,
       };
     }),
 );

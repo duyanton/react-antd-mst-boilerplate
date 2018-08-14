@@ -36,15 +36,30 @@ const ActionButton = styled(Button)`
   }
 `;
 
+const Image = styled('img')`
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+`;
+
 const UserTable = observer(
   ({
- loading, users, pageSize, total, onClickEdit, onClickDelete, onClickRow, onPageChange,
+ loading, users, pageSize, total, onEdit, onDelete, onClickRow, onPageChange,
 }) => {
     const columns = [
       {
         title: 'Id',
         dataIndex: 'id',
         key: 'id',
+        width: 60,
+      },
+      {
+        title: 'Avatar',
+        dataIndex: 'avatar',
+        key: 'avatar',
+        width: 80,
+        render: (text, record) => <Image src={record.avatar} />,
       },
       {
         title: 'Full name',
@@ -78,18 +93,18 @@ const UserTable = observer(
               icon="edit"
               onClick={(e) => {
                 e.stopPropagation();
-                onClickEdit(record.id);
+                onEdit(record.id);
               }}
             >
               Edit
             </ActionButton>
             <ActionButton
-              type="primary"
+              type="danger"
               ghost
               icon="delete"
               onClick={(e) => {
                 e.stopPropagation();
-                onClickDelete(record.id);
+                onDelete(record.id);
               }}
             >
               Delete
@@ -126,16 +141,16 @@ UserTable.propTypes = {
   currentPage: PropTypes.number,
   pageSize: PropTypes.number,
   total: PropTypes.number,
-  onClickEdit: PropTypes.func,
-  onClickDelete: PropTypes.func,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
   onClickRow: PropTypes.func,
   onPageChange: PropTypes.func,
 };
 
 UserTable.defaultProps = {
   users: [],
-  onClickEdit: () => {},
-  onClickDelete: () => {},
+  onEdit: () => {},
+  onDelete: () => {},
   onClickRow: () => {},
   onPageChange: () => {},
 };
