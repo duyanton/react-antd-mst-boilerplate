@@ -1,6 +1,6 @@
 # React Antd, MobX and MobX State Tree Boilerplate
 
-Out of the box solution to create your React app with Ant Design components, MobX and MobX State Tree for state management
+Out of the box solution to create your React app with Ant Design components, MobX and MobX State Tree for state management. An opinionated way to structure large scale React application, inspired by Redux global store structure and MST modeling.
 
 ## Features
 
@@ -19,9 +19,12 @@ Out of the box solution to create your React app with Ant Design components, Mob
 - `node` v8
 - `npm` v5.6
 
-## Development
+## How to use
 
-- Starting dev server: `npm start`
+- Clone this repository: `git clone git@github.com:duyanton/react-antd-mst-boilerplate.git`
+- Install dependencies: `npm install`
+- Starting json-server: `npm run start-server`
+- Starting example app: `npm start`
 
 ## Production
 
