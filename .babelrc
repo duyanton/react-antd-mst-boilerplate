@@ -1,9 +1,8 @@
 {
-  "presets": ["env", "react", "stage-0"],
+  "presets": ["react-app"],
   "plugins": [
     ["emotion"],
     "lodash",
-    "transform-decorators-legacy",
     "transform-async-generator-functions",
     [
       "react-intl",
@@ -16,6 +15,8 @@
       {
         "libraryName": "antd"
       }
-    ]
+    ],
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
   ]
 }

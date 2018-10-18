@@ -13,7 +13,7 @@ const middlewares = jsonServer.defaults();
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
 
-const SECRET_KEY = 'react-antd-mst-boilerplate';
+const SECRET_KEY = 'react-mobx-mst-boilerplate';
 const expiresIn = '1y';
 
 // Create JWT token
@@ -49,8 +49,8 @@ server.post('/auth/login', (req, res) => {
 
 server.use(/^(?!\/auth).*$/, (req, res, next) => {
   if (
-    req.headers.authorization === undefined ||
-    req.headers.authorization.split(' ')[0] !== 'Bearer'
+    req.headers.authorization === undefined
+    || req.headers.authorization.split(' ')[0] !== 'Bearer'
   ) {
     const status = 401;
     const message = 'Bad authorization header';

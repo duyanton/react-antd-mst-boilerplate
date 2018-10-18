@@ -21,7 +21,7 @@ Out of the box solution to create your React app with Ant Design components, Mob
 
 ## How to use
 
-- Clone this repository: `git clone git@github.com:duyanton/react-antd-mst-boilerplate.git`
+- Clone this repository: `git clone git@github.com:duyanton/react-mobx-mst-boilerplate.git`
 - Install dependencies: `npm install`
 - Starting json-server: `npm run start-server`
 - Starting example app: `npm start`
