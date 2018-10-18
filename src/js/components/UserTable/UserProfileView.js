@@ -43,7 +43,10 @@ const ActionButton = styled(Button)`
 
 const ProfileItem = ({ fieldKey, value }) => (
   <ProfileItemWrapper>
-    <FieldKey>{fieldKey}:</FieldKey>
+    <FieldKey>
+      {fieldKey}
+:
+    </FieldKey>
     {value}
   </ProfileItemWrapper>
 );

@@ -169,12 +169,12 @@ const SessionStore = types
               token,
               self.rememberMe
                 ? {
-                    path: '/',
-                    maxAge: 24 * 3600 * 30, // Expires cookies in 30 days
-                  }
+                  path: '/',
+                  maxAge: 24 * 3600 * 30, // Expires cookies in 30 days
+                }
                 : {
-                    expires: 0,
-                  },
+                  expires: 0,
+                },
             );
           }
         },

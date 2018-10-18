@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _values from 'lodash/values';
 
-import { Router, Route, Redirect, browserHistory } from 'react-router';
+import {
+  Router, Route, Redirect, browserHistory,
+} from 'react-router';
 import Loadable from 'react-loadable';
 
 import withRole from './HOC/withRole';

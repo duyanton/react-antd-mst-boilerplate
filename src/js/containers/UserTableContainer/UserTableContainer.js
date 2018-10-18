@@ -26,11 +26,6 @@ class UserTableContainer extends Component {
     return !!(this.selectedUserId && this.selectedUser);
   }
 
-  @observable
-  selectedUserId;
-  @observable
-  isEditing;
-
   @action
   handleClickRow = (userId) => {
     this.selectedUserId = userId;
@@ -81,11 +76,17 @@ class UserTableContainer extends Component {
     pagination.setPage(page);
   };
 
+  @observable
+  selectedUserId;
+
+  @observable
+  isEditing;
+
   render() {
     const { userStore } = this.props;
     const {
- isInited, isLoading, usersFromResponse, pagination,
-} = userStore;
+      isInited, isLoading, usersFromResponse, pagination,
+    } = userStore;
 
     return (
       <Fragment>

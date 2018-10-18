@@ -13,7 +13,7 @@ import roles from '../constants/roles';
  * @returns {React Component | null}
  */
 const RoleAuthorizationView = (UserView, AdminView, GuestView) =>
-  class RoleBasedComponent extends Component {
+  class WrappedComponent extends Component {
     static propTypes = {
       role: PropTypes.string.isRequired,
     };

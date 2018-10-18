@@ -35,8 +35,8 @@ class UserDrawer extends Component {
 
   render() {
     const {
- user, visible, onClose, onEdit, onDelete, onSave, mode,
-} = this.props;
+      user, visible, onClose, onEdit, onDelete, onSave, mode,
+    } = this.props;
 
     return (
       <Drawer width={480} placement="right" visible={visible} onClose={onClose}>

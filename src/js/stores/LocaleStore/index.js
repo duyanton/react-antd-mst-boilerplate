@@ -24,9 +24,9 @@ const LocaleStore = types
     get messages() {
       // Try full locale, try locale without region code, fallback to default language
       return (
-        localeData[self.languageWithoutRegionCode] ||
-        localeData[self.language] ||
-        localeData.DEFAULT_LANGUAGE
+        localeData[self.languageWithoutRegionCode]
+        || localeData[self.language]
+        || localeData.DEFAULT_LANGUAGE
       );
     },
   }))
@@ -53,10 +53,9 @@ const LocaleStore = types
       const cookieLanguage = self.cookies.get(COOKIE_NAME);
 
       // Language from user's browser settings
-      const browserLanguage =
-        (navigator.languages && navigator.languages[0].split('-')[0]) ||
-        navigator.language ||
-        navigator.userLanguage;
+      const browserLanguage = (navigator.languages && navigator.languages[0].split('-')[0])
+        || navigator.language
+        || navigator.userLanguage;
 
       self.language = cookieLanguage || browserLanguage;
     };

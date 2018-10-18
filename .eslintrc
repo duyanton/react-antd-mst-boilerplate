@@ -3,50 +3,23 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true,
+    "node": true,
+    "jest": true,
     "es6": true
   },
-  "parserOptions": {
-    "ecmaVersion": 8,
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true
-    },
-    "sourceType": "module"
-  },
-  "globals": {
-    "it": true,
-    "expect": true,
-    "describe": true,
-    "jest": true,
-    "document": true,
-    "test": true,
-    "window": true,
-    "fetch": true,
-    "WebSocket": true,
-    "alert": true
-  },
   "rules": {
-    "indent": 0,
-    "template-curly-spacing": 0,
     "camelcase": 0,
     "class-methods-use-this": 0,
     "function-paren-newline": 0,
-    "import/extensions": 0,
-    "import/no-dynamic-require": 0,
-    "import/no-extraneous-dependencies": 0,
-    "import/no-unresolved": 0,
-    "import/prefer-default-export": 0,
-    "jsx-a11y/alt-text": 0,
-    "jsx-a11y/anchor-is-valid": 0,
+    "implicit-arrow-linebreak": 0,
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/no-static-element-interactions": 0,
     "no-console": 0,
     "no-param-reassign": 0,
     "no-unused-expressions": 0,
     "react/forbid-prop-types": 0,
-    "react/jsx-closing-bracket-location": 0,
+    "react/destructuring-assignment": 0,
     "react/jsx-filename-extension": 0,
-    "react/jsx-first-prop-new-line": 0,
     "react/no-array-index-key": 0,
     "react/prefer-stateless-function": 0,
     "react/require-default-props": 0

@@ -7,7 +7,9 @@ import { inject, observer } from 'mobx-react';
 import styled from 'react-emotion';
 
 import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
-import { Form, Icon, Input, Button, Checkbox, notification } from 'antd';
+import {
+  Form, Icon, Input, Button, Checkbox, notification,
+} from 'antd';
 
 const FormItem = Form.Item;
 
@@ -74,15 +76,12 @@ class LoginContainer extends Component {
     this.isSubmitting = value;
   };
 
-  @observable
-  isSubmitting;
-
   handleSubmit = (e) => {
     e.preventDefault();
 
     const {
- form, sessionStore, router, intl,
-} = this.props;
+      form, sessionStore, router, intl,
+    } = this.props;
 
     form.validateFields((err, values) => {
       if (!err) {
@@ -109,6 +108,9 @@ class LoginContainer extends Component {
     });
   };
 
+  @observable
+  isSubmitting;
+
   render() {
     const { form, intl } = this.props;
     const { getFieldDecorator } = form;
@@ -123,7 +125,10 @@ class LoginContainer extends Component {
           <FormItem>
             {getFieldDecorator('email', {
               rules: [
-                { required: true, message: intl.formatMessage(MESSAGES.emailRequired) },
+                {
+                  required: true,
+                  message: intl.formatMessage(MESSAGES.emailRequired),
+                },
                 {
                   type: 'email',
                   message: intl.formatMessage(MESSAGES.emailInvalid),
@@ -139,7 +144,12 @@ class LoginContainer extends Component {
           </FormItem>
           <FormItem>
             {getFieldDecorator('password', {
-              rules: [{ required: true, message: intl.formatMessage(MESSAGES.passwordRequired) }],
+              rules: [
+                {
+                  required: true,
+                  message: intl.formatMessage(MESSAGES.passwordRequired),
+                },
+              ],
               initialValue: 'password',
             })(
               <Input

@@ -23,19 +23,19 @@ class RestTransport {
       response => response,
       (error) => {
         if (
-          error.response &&
-          error.response.status === 400 &&
-          config.handleBadRequest &&
-          config.handleBadRequest instanceof Function
+          error.response
+          && error.response.status === 400
+          && config.handleBadRequest
+          && config.handleBadRequest instanceof Function
         ) {
           config.handleBadRequest();
         }
 
         if (
-          error.response &&
-          error.response.status === 401 &&
-          config.handleUnauthorized &&
-          config.handleUnauthorized instanceof Function
+          error.response
+          && error.response.status === 401
+          && config.handleUnauthorized
+          && config.handleUnauthorized instanceof Function
         ) {
           config.handleUnauthorized();
         }

@@ -45,8 +45,8 @@ const Image = styled('img')`
 
 const UserTable = observer(
   ({
- loading, users, pageSize, total, onEdit, onDelete, onClickRow, onPageChange,
-}) => {
+    loading, users, pageSize, total, onEdit, onDelete, onClickRow, onPageChange,
+  }) => {
     const columns = [
       {
         title: 'Id',

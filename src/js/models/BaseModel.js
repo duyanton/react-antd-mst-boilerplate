@@ -1,4 +1,6 @@
-import { types, flow, getRoot, applySnapshot, getParent, getSnapshot } from 'mobx-state-tree';
+import {
+  types, flow, getRoot, applySnapshot, getParent, getSnapshot,
+} from 'mobx-state-tree';
 
 export default types
   .model('BaseModel', {

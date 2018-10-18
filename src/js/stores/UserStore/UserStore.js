@@ -1,5 +1,7 @@
 import { values } from 'mobx';
-import { types, flow, detach, isStateTreeNode } from 'mobx-state-tree';
+import {
+  types, flow, detach, isStateTreeNode,
+} from 'mobx-state-tree';
 
 import BaseModelStore from '../Composable/BaseModelStore';
 import Pagination from '../Composable/Pagination';
