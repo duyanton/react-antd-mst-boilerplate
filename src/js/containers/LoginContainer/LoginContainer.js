@@ -68,7 +68,6 @@ class LoginContainer extends Component {
     form: PropTypes.object,
     sessionStore: PropTypes.object,
     intl: PropTypes.object,
-    router: PropTypes.object,
   };
 
   @action
@@ -79,9 +78,7 @@ class LoginContainer extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const {
-      form, sessionStore, router, intl,
-    } = this.props;
+    const { form, sessionStore, intl } = this.props;
 
     form.validateFields((err, values) => {
       if (!err) {
@@ -94,7 +91,7 @@ class LoginContainer extends Component {
           rememberMe,
           () => {
             this.setIsSubmitting(false);
-            router.push('/users');
+            window.location.href = '/users';
           },
           () => {
             this.setIsSubmitting(false);
